@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>AngularJS with ADAL to embed Azure Time Series Insights and Power BI</title>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+    <!-- Latest compiled and minified ADAL JavaScript -->
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
+    <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal-angular.min.js"></script>
+    <!-- TSI -->
+    <link rel="stylesheet" type="text/css" href="sampleStyles.css"></link>
+    <script src="https://unpkg.com/tsiclient@1.1.4/tsiclient.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/tsiclient@1.1.4/tsiclient.css"></link>
+    <!-- Power BI -->
+    <script src="https://microsoft.github.io/PowerBI-JavaScript/demo/node_modules/powerbi-client/dist/powerbi.js"></script>
+</head>
+<body data-ng-app="angularjsTsiPbiApp">
+    <div data-ng-model="userInfo" data-ng-controller="homeController">
+        <span data-ng-hide="!userInfo.isAuthenticated">Welcome {{userInfo.userName}} </span>
+        <button data-ng-hide="!userInfo.isAuthenticated" data-ng-click="logout()">Logout</button>
+        <button data-ng-hide="userInfo.isAuthenticated" data-ng-click="login()">Login</button>
+        <button data-ng-hide="!userInfo.isAuthenticated" data-ng-click="embed()">Embed reports</button>
+ 
+        <div>
+            {{userInfo.loginError}}
+        </div>
+        <div>
+            {{testMessage}}
+        </div>
+    </div>
+    <div data-ng-view>
+        Your view will appear here. 
+    </div>
+
+    <script src="env.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/homeController.js"></script>
+    <script src="controllers/embedController.js"></script>
+</body>
